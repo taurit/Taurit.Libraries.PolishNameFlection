@@ -1,12 +1,12 @@
 {
-  "version": "1.0.0-*",
+  "version": "0.0.1-*",
   "description": "Flection helper for names and surnames in Polish language",
-  "authors": [ "taurit" ],
-  "tags": [ "" ],
-  "projectUrl": "",
-  "licenseUrl": "",
+  "authors": [ "Taurit" ],
+  "tags": [ "polish, name, first, given, surname, forename, flection, nominative, genitive" ],
+  "projectUrl": "https://github.com/taurit/PolishNameFlection",
+  "licenseUrl": "https://github.com/taurit/PolishNameFlection/blob/master/LICENSE",
   "dependencies": {
-    "xunit": "2.2.0-beta1-build3239",
+    "xunit": "2.1.0",
     "xunit.runner.dnx": "2.1.0-rc1-build204"
   },
   "commands": {

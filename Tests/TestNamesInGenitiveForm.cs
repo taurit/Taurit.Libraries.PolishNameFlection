@@ -1,47 +1,45 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using Xunit;
-using Xunit.Extensions;
+
 // ReSharper disable MemberCanBePrivate.Global
 
-namespace NameHelper.Polish.Tests
+namespace Taurit.NameHelper.Polish.Tests
 {
     public class TestNamesInGenitiveForm
     {
+        public static IEnumerable<object[]> KnownCorrectDataForMales => GetDataForGender(Gender.Male);
+        public static IEnumerable<object[]> KnownCorrectDataForFemales => GetDataForGender(Gender.Female);
+        public static IEnumerable<object[]> KnownFemaleNames => GetMostPopularNames(Gender.Female);
+        public static IEnumerable<object[]> KnownMaleNames => GetMostPopularNames(Gender.Male);
+
         /// <summary>
-        /// Tests GetFirstNameInGenitiveForm() for the most popular 50+ male names in Poland
+        ///     Tests GetFirstNameInGenitiveForm() for the most popular 50+ male names in Poland
         /// </summary>
         [Theory]
         [MemberData(nameof(KnownCorrectDataForMales))]
         [Trait("Category", "Male")]
-        public void TestNameFlectionForMales(string nominative, string genitive, Gender gender)
+        public void NameFormShouldChangeToGenitiveCorrectly_ForMales(string nominative, string genitive, Gender gender)
         {
-            NameHelper nh = new NameHelper(gender, nominative);
-            Assert.Equal(genitive, nh.GetFirstNameInGenitiveForm());
+            var nh = new PolishNameFlectionHelper();
+            Assert.Equal(genitive, nh.GetFirstNameInGenitiveForm(nominative));
         }
 
         /// <summary>
-        /// Tests GetFirstNameInGenitiveForm() for the most popular 50+ female names in Poland
+        ///     Tests GetFirstNameInGenitiveForm() for the most popular 50+ female names in Poland
         /// </summary>
         [Theory]
         [MemberData(nameof(KnownCorrectDataForFemales))]
         [Trait("Category", "Female")]
-        public void TestNameFlectionForFemales(string nominative, string genitive, Gender gender)
+        public void NameFormShouldChangeToGenitiveCorrectly_ForFemales(string nominative, string genitive, Gender gender)
         {
-            NameHelper nh = new NameHelper(gender, nominative);
-            Assert.Equal(genitive, nh.GetFirstNameInGenitiveForm());
+            var nh = new PolishNameFlectionHelper();
+            Assert.Equal(genitive, nh.GetFirstNameInGenitiveForm(nominative));
         }
 
-
-        public static IEnumerable<object[]> KnownCorrectDataForMales => GetDataForGender(Gender.Male);
-        public static IEnumerable<object[]> KnownCorrectDataForFemales => GetDataForGender(Gender.Female);
-
         /// <summary>
-        /// Loads reference data for test from a file
+        ///     Loads reference data for test from a file
         /// </summary>
         /// <param name="gender"></param>
         /// <returns></returns>
@@ -49,8 +47,8 @@ namespace NameHelper.Polish.Tests
         {
             string genderCode = gender == Gender.Female ? "F" : "M";
 
-            string[] names = File.ReadAllLines("KnownNames.csv", Encoding.UTF8);
-            foreach (var name in names)
+            string[] names = File.ReadAllLines("Tests/Data/KnownNames.csv", Encoding.UTF8);
+            foreach (string name in names)
             {
                 string[] nameArray = name.Split(';');
                 string nameNominative = nameArray[0];
@@ -60,6 +58,51 @@ namespace NameHelper.Polish.Tests
                 if (genderCodeInFile == genderCode)
                     yield return new object[] {nameNominative, nameGenitive, gender};
             }
+        }
+
+        private static IEnumerable<object[]> GetMostPopularNames(Gender gender)
+        {
+            string fileName = gender == Gender.Female
+                ? "Tests/Data/PopularFemaleNamesNominative.csv"
+                : "Tests/Data/PopularMaleNamesNominative.csv";
+
+            string[] names = File.ReadAllLines(fileName, Encoding.UTF8);
+
+            foreach (string name in names)
+            {
+                yield return new object[] {name};
+            }
+        }
+
+
+        [Theory]
+        [MemberData(nameof(KnownFemaleNames))]
+        [Trait("Category", "Female - Gender recognition")]
+        public void GenderShouldBeRecognizedCorrectly_ForRegularFemaleNames(string firstName)
+        {
+            var nh = new PolishNameFlectionHelper();
+            Assert.Equal(Gender.Female, nh.RecognizeGender(firstName));
+        }
+
+        [Theory]
+        [MemberData(nameof(KnownMaleNames))]
+        [Trait("Category", "Male - Gender recognition")]
+        public void GenderShouldBeRecognizedCorrectly_ForRegularMaleNames(string firstName)
+        {
+            var nh = new PolishNameFlectionHelper();
+            Assert.Equal(Gender.Male, nh.RecognizeGender(firstName));
+        }
+
+        [Fact]
+        public void GenderShouldBeRecognizedCorrectly_ForNamesInExceptionList()
+        {
+            var nh = new PolishNameFlectionHelper();
+            Assert.Equal(Gender.Female, nh.RecognizeGender("Beatrycze"));
+
+            Assert.Equal(Gender.Male, nh.RecognizeGender("Barnaba"));
+            Assert.Equal(Gender.Male, nh.RecognizeGender("Kuba"));
+            Assert.Equal(Gender.Male, nh.RecognizeGender("Bonawentura"));
+            Assert.Equal(Gender.Male, nh.RecognizeGender("Kosma"));
         }
     }
 }
