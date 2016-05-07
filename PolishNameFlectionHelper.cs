@@ -24,6 +24,14 @@ namespace Taurit.NameHelper.Polish
         /// </param>
         /// <returns>Names in a genitive form separated with space character</returns>
         string GetFirstNameInGenitiveForm(string firstNameNominative);
+
+        /// <summary>
+        ///     Returns genitive form of a Polish last (family) name.
+        /// </summary>
+        /// <param name="familyNameNominative">Nominative form of person's family name.</param>
+        /// <param name="gender">Passing gender of person is necessary as it can't be reliably recognized based on second name.</param>
+        /// <returns></returns>
+        string GetFamilyNameInGenitiveForm(string familyNameNominative, Gender gender);
     }
 
     public class PolishNameFlectionHelper : IPolishNameFlectionHelper
@@ -70,6 +78,108 @@ namespace Taurit.NameHelper.Polish
             }
 
             return namesInGenitive;
+        }
+
+        public string GetFamilyNameInGenitiveForm(string familyNameNominative, Gender gender)
+        {
+            return gender == Gender.Male
+                ? GetFamilyNameInGenitiveFormForMale(familyNameNominative)
+                : GetFamilyNameInGenitiveFormForFemale(familyNameNominative);
+        }
+
+        private string GetFamilyNameInGenitiveFormForFemale(string name)
+        {
+            // Kowalska -> Kowalskiej, Zawadzka -> Zawadzkiej, Nowicka -> Nowickiej
+            if (name.EndsWithRegex("[szc]ka"))
+                return name.RemoveNthLastCharacter(0).AppendText("iej");
+
+            // Czajka -> Czajki, Kościuszko -> Kościuszki
+            if (name.EndsWithRegex("k[ao]"))
+                return name.RemoveNthLastCharacter(0).AppendText("i");
+
+            // Konieczna -> Koniecznej
+            if (name.EndsWithRegex("zna"))
+                return name.RemoveNthLastCharacter(0).AppendText("ej");
+
+
+            // Zola -> Zoli
+            if (name.EndsWithRegex("[l]a"))
+                return name.RemoveNthLastCharacter(0).AppendText("i");
+
+            // Domagała -> Domagały, Gajda -> Gajdy
+            if (name.EndsWithRegex("[włdpzhrbn]a"))
+                return name.RemoveNthLastCharacter(0).AppendText("y");
+            
+            // Probably there should be no change in case
+            return name;
+        }
+
+        private string GetFamilyNameInGenitiveFormForMale(string name)
+        {
+            // Piłsudski -> Piłsudskiego
+            if (name.EndsWithRegex("[szc]ki"))
+                return name.RemoveNthLastCharacter(0).AppendText("iego");
+
+            // Dimitrescu -> Dimitrescu, Hugo -> Hugo, Oko -> Oko
+            if (name.EndsWithRegex("(scu|ois|ugo|hr[iu]|[Oo]ko)"))
+                return name;
+
+            // Czajka -> Czajki, Kościuszko -> Kościuszki
+            if (name.EndsWithRegex("k[ao]"))
+                return name.RemoveNthLastCharacter(0).AppendText("i");
+
+            // Konieczny -> Koniecznego
+            if (name.EndsWithRegex("zny"))
+                return name.RemoveNthLastCharacter(0).AppendText("ego");
+            
+            // Turek -> Turka, Wróbel -> Wróbla
+            if (name.EndsWithRegex("[^i]e[kl]"))
+                return name.RemoveNthLastCharacter(1).AppendText("a");
+
+            // Zola -> Zoli
+            if (name.EndsWithRegex("[l]a"))
+                return name.RemoveNthLastCharacter(0).AppendText("i");
+
+            // Cichoń -> Cichonia
+            if (name.EndsWith("oń"))
+                return name.ReplaceEnding("ń", "nia");
+
+            // Mróz -> Mroza
+            if (name.EndsWith("óz"))
+                return name.ReplaceEnding("óz", "oza");
+
+
+            // Marzec -> Marca, Niemiec -> Niemca
+            if (name.EndsWithRegex("[iz]ec"))
+                return name.ReplaceEnding("ec", "ca").RemoveNthLastCharacter(2);
+
+            // Kwiecień -> Kwietnia, 
+            if (name.EndsWith("cień"))
+                return name.ReplaceEnding("cień", "tnia");
+
+            // Stępień -> Stępnia
+            if (name.EndsWith("pień"))
+                return name.ReplaceEnding("pień", "pnia");
+
+            // Domagała -> Domagały
+            if (name.EndsWithRegex("[włdpzhrbn]a"))
+                return name.RemoveNthLastCharacter(0).AppendText("y");
+
+
+            // Lange -> Langego
+            if (name.EndsWithRegex("ge"))
+                return name.AppendText("go");
+
+            // Picasso -> Picassa
+            if (name.EndsWithRegex("so"))
+                return name.ReplaceEnding("so", "sa");
+
+            // Łesiów -> Łesiowa
+            if (name.EndsWithRegex("ów"))
+                return name.ReplaceEnding("ów", "owa");
+
+
+            return name.AppendText("a");
         }
 
         /// <summary>
