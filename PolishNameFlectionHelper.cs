@@ -110,6 +110,10 @@ namespace Taurit.NameHelper.Polish
             if (name.EndsWithRegex("[y]a"))
                 return name.RemoveNthLastCharacter(0).AppendText("i");
 
+            // Otto -> Ottona, Bruno -> Brunona, Hugo -> Hugona
+            if (name.EndsWithRegex("o"))
+                return name.AppendText("na");
+
             // Tomasz -> Tomasza, works for most male names
             if (!name.EndsWith("a")) // so it's most likely male's name
                 return name.AppendText("a");
@@ -118,7 +122,7 @@ namespace Taurit.NameHelper.Polish
             if (name.EndsWith("a", StringComparison.InvariantCulture))
                 return name.ReplaceEnding("a", "y");
 
-            // Fallback rule, useless
+            // Fallback rule - no change (eg. Beatrycze -> Beatrycze)
             return name;
         }
     }
