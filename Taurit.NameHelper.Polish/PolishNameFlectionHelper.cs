@@ -109,7 +109,7 @@ namespace Taurit.NameHelper.Polish
             // Domagała -> Domagały, Gajda -> Gajdy
             if (name.EndsWithRegex("[włdpzhrbn]a"))
                 return name.RemoveNthLastCharacter(0).AppendText("y");
-            
+
             // Probably there should be no change in case
             return name;
         }
@@ -131,7 +131,7 @@ namespace Taurit.NameHelper.Polish
             // Konieczny -> Koniecznego
             if (name.EndsWithRegex("zny"))
                 return name.RemoveNthLastCharacter(0).AppendText("ego");
-            
+
             // Turek -> Turka, Wróbel -> Wróbla
             if (name.EndsWithRegex("[^i]e[kl]"))
                 return name.RemoveNthLastCharacter(1).AppendText("a");
@@ -229,7 +229,7 @@ namespace Taurit.NameHelper.Polish
                 return name.AppendText("a");
 
             // Ewa -> Ewy
-            if (name.EndsWith("a", StringComparison.InvariantCulture))
+            if (name.EndsWith("a", StringComparison.CurrentCultureIgnoreCase))
                 return name.ReplaceEnding("a", "y");
 
             // Fallback rule - no change (eg. Beatrycze -> Beatrycze)

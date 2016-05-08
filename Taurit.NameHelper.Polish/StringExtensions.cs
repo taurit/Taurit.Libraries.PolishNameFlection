@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Text.RegularExpressions;
 
 namespace Taurit.NameHelper.Polish
@@ -76,8 +75,6 @@ namespace Taurit.NameHelper.Polish
         /// <returns>True if <paramref name="word" /> ends with <paramref name="pattern" />, false otherwise.</returns>
         public static bool EndsWithRegex(this string word, string pattern)
         {
-            Debug.Assert(!pattern.EndsWith("$"));
-
             var regex = new Regex(pattern + "$");
             var match = regex.Match(word);
 

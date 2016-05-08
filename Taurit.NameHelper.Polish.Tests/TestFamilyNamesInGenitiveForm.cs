@@ -17,26 +17,26 @@ namespace Taurit.NameHelper.Polish.Tests
         [MemberData(nameof(KnownMaleFamilyNames))]
         [Trait("Category", "Family Name - Males")]
         public void FamilyNameFormShouldChangeToGenitiveCorrectly_ForMales(string nominative, string genitive,
-            Gender gender)
+            Gender nameGender)
         {
             var nh = new PolishNameFlectionHelper();
-            Assert.Equal(genitive, nh.GetFamilyNameInGenitiveForm(nominative, gender));
+            Assert.Equal(genitive, nh.GetFamilyNameInGenitiveForm(nominative, nameGender));
         }
 
         [Theory]
         [MemberData(nameof(KnownFemaleFamilyNames))]
         [Trait("Category", "Family Name - Female")]
         public void FamilyNameFormShouldChangeToGenitiveCorrectly_ForFemales(string nominative, string genitive,
-            Gender gender)
+            Gender nameGender)
         {
             var nh = new PolishNameFlectionHelper();
-            Assert.Equal(genitive, nh.GetFamilyNameInGenitiveForm(nominative, gender));
+            Assert.Equal(genitive, nh.GetFamilyNameInGenitiveForm(nominative, nameGender));
         }
 
 
-        private static IEnumerable<object[]> LoadKnownFamilyNames(Gender gender)
+        private static IEnumerable<object[]> LoadKnownFamilyNames(Gender nameGender)
         {
-            string[] names = File.ReadAllLines("Tests/Data/KnownFamilyNames.csv", Encoding.UTF8);
+            string[] names = File.ReadAllLines("Data/KnownFamilyNames.csv", Encoding.UTF8);
             IEnumerable<string> namesWiithoutHeader = names.Skip(1);
 
             var pairs = new List<object[]>();
@@ -62,7 +62,7 @@ namespace Taurit.NameHelper.Polish.Tests
                 }
             }
 
-            return pairs.Where(x => (Gender) x[2] == gender);
+            return pairs.Where(x => (Gender) x[2] == nameGender);
         }
     }
 }

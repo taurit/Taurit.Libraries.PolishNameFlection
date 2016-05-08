@@ -20,7 +20,7 @@ namespace Taurit.NameHelper.Polish.Tests
         [Theory]
         [MemberData(nameof(KnownCorrectDataForMales))]
         [Trait("Category", "Male")]
-        public void NameFormShouldChangeToGenitiveCorrectly_ForMales(string nominative, string genitive, Gender gender)
+        public void NameFormShouldChangeToGenitiveCorrectly_ForMales(string nominative, string genitive, Gender nameGender)
         {
             var nh = new PolishNameFlectionHelper();
             Assert.Equal(genitive, nh.GetFirstNameInGenitiveForm(nominative));
@@ -32,7 +32,7 @@ namespace Taurit.NameHelper.Polish.Tests
         [Theory]
         [MemberData(nameof(KnownCorrectDataForFemales))]
         [Trait("Category", "Female")]
-        public void NameFormShouldChangeToGenitiveCorrectly_ForFemales(string nominative, string genitive, Gender gender)
+        public void NameFormShouldChangeToGenitiveCorrectly_ForFemales(string nominative, string genitive, Gender nameGender)
         {
             var nh = new PolishNameFlectionHelper();
             Assert.Equal(genitive, nh.GetFirstNameInGenitiveForm(nominative));
@@ -41,13 +41,13 @@ namespace Taurit.NameHelper.Polish.Tests
         /// <summary>
         ///     Loads reference data for test from a file
         /// </summary>
-        /// <param name="gender"></param>
+        /// <param name="nameGender"></param>
         /// <returns></returns>
-        private static IEnumerable<object[]> GetDataForGender(Gender gender)
+        private static IEnumerable<object[]> GetDataForGender(Gender nameGender)
         {
-            string genderCode = gender == Gender.Female ? "F" : "M";
+            string genderCode = nameGender == Gender.Female ? "F" : "M";
 
-            string[] names = File.ReadAllLines("Tests/Data/KnownNames.csv", Encoding.UTF8);
+            string[] names = File.ReadAllLines("Data/KnownNames.csv", Encoding.UTF8);
             foreach (string name in names)
             {
                 string[] nameArray = name.Split(';');
@@ -56,15 +56,15 @@ namespace Taurit.NameHelper.Polish.Tests
                 string genderCodeInFile = nameArray[2];
 
                 if (genderCodeInFile == genderCode)
-                    yield return new object[] {nameNominative, nameGenitive, gender};
+                    yield return new object[] {nameNominative, nameGenitive, nameGender};
             }
         }
 
-        private static IEnumerable<object[]> GetMostPopularNames(Gender gender)
+        private static IEnumerable<object[]> GetMostPopularNames(Gender nameGender)
         {
-            string fileName = gender == Gender.Female
-                ? "Tests/Data/PopularFemaleNamesNominative.csv"
-                : "Tests/Data/PopularMaleNamesNominative.csv";
+            string fileName = nameGender == Gender.Female
+                ? "Data/PopularFemaleNamesNominative.csv"
+                : "Data/PopularMaleNamesNominative.csv";
 
             string[] names = File.ReadAllLines(fileName, Encoding.UTF8);
 
