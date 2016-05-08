@@ -10,12 +10,36 @@ namespace Taurit.NameHelper.Polish
         /// <summary>
         ///     Recognize gender of a name, based on grammar rules and exception list.
         /// </summary>
-        /// <param name="firstName">First (given) name of a person.</param>
+        /// <param name="firstNameInNominative">First (given) name of a person in a nominative case.</param>
         /// <returns>Recognized gender of a person</returns>
-        Gender RecognizeGender(string firstName);
+        Gender RecognizeGender(string firstNameInNominative);
 
         /// <summary>
-        ///     Returns genitive form of a Polish first (given) name.
+        ///     Returns different case of a given name.
+        /// </summary>
+        /// <param name="firstNameInNominative">Name in its nominative case</param>
+        /// <param name="desiredCase">
+        ///     Desired case. Currently only some cases are supported by this library:
+        ///     <list type="bullet">
+        ///         <item>
+        ///             <description>Genitive</description>
+        ///         </item>
+        ///     </list>
+        /// </param>
+        /// <returns>Name in <paramref name="desiredCase" /> case.</returns>
+        string GetFirstName(string firstNameInNominative, Case desiredCase);
+
+        /// <summary>
+        ///     Returns different case of a Polish last (family) name.
+        /// </summary>
+        /// <param name="familyNameInNominative"></param>
+        /// <param name="gender"></param>
+        /// <param name="desiredCase"></param>
+        /// <returns></returns>
+        string GetFamilyName(string familyNameInNominative, Gender gender, Case desiredCase);
+
+        /// <summary>
+        ///     Returns genitive case of a Polish first (given) name.
         ///     Supports the scenario where a person has more than one name (eg. "Paweł Łukasz" or "Anna Maria")
         /// </summary>
         /// <param name="firstNameNominative">
@@ -23,15 +47,17 @@ namespace Taurit.NameHelper.Polish
         ///     separated with space character.
         /// </param>
         /// <returns>Names in a genitive form separated with space character</returns>
+        [Obsolete("Use GetFirstName(firstNameNominative, Case.Genitive) instead")]
         string GetFirstNameInGenitiveForm(string firstNameNominative);
 
         /// <summary>
-        ///     Returns genitive form of a Polish last (family) name.
+        ///     Returns genitive case of a Polish last (family) name.
         /// </summary>
-        /// <param name="familyNameNominative">Nominative form of person's family name.</param>
+        /// <param name="familyNameInNominative">Nominative form of person's family name.</param>
         /// <param name="gender">Passing gender of person is necessary as it can't be reliably recognized based on second name.</param>
         /// <returns></returns>
-        string GetFamilyNameInGenitiveForm(string familyNameNominative, Gender gender);
+        [Obsolete("Use GetFamilyName(familyNameInNominative, gender, Case.Genitive) instead")]
+        string GetFamilyNameInGenitiveForm(string familyNameInNominative, Gender gender);
     }
 
     public class PolishNameFlectionHelper : IPolishNameFlectionHelper
@@ -46,21 +72,41 @@ namespace Taurit.NameHelper.Polish
             "Kosma"
         };
 
-        public Gender RecognizeGender(string firstName)
+        public Gender RecognizeGender(string firstNameInNominative)
         {
             // Lookup exception list (with names that don't follow the grammar rules)
-            if (_knownMaleNames.Contains(firstName))
+            if (_knownMaleNames.Contains(firstNameInNominative))
                 return Gender.Male;
 
-            if (_knownFemaleNames.Contains(firstName))
+            if (_knownFemaleNames.Contains(firstNameInNominative))
                 return Gender.Female;
 
             // If the name ends with "a", it's most likely woman's name
-            var heuristicGender = firstName.EndsWith("a", StringComparison.OrdinalIgnoreCase)
+            var heuristicGender = firstNameInNominative.EndsWith("a", StringComparison.OrdinalIgnoreCase)
                 ? Gender.Female
                 : Gender.Male;
 
             return heuristicGender;
+        }
+
+        public string GetFirstName(string firstNameInNominative, Case desiredCase)
+        {
+            if (desiredCase == Case.Genitive)
+            {
+                return GetFirstNameInGenitiveForm(firstNameInNominative);
+            }
+
+            throw new NotSupportedException("This library doesn't support requested case yet.");
+        }
+
+        public string GetFamilyName(string familyNameInNominative, Gender gender, Case desiredCase)
+        {
+            if (desiredCase == Case.Genitive)
+            {
+                return GetFamilyNameInGenitiveForm(familyNameInNominative, gender);
+            }
+
+            throw new NotSupportedException("This library doesn't support requested case yet.");
         }
 
         public string GetFirstNameInGenitiveForm(string firstNameNominative)
@@ -80,11 +126,11 @@ namespace Taurit.NameHelper.Polish
             return namesInGenitive;
         }
 
-        public string GetFamilyNameInGenitiveForm(string familyNameNominative, Gender gender)
+        public string GetFamilyNameInGenitiveForm(string familyNameInNominative, Gender gender)
         {
             return gender == Gender.Male
-                ? GetFamilyNameInGenitiveFormForMale(familyNameNominative)
-                : GetFamilyNameInGenitiveFormForFemale(familyNameNominative);
+                ? GetFamilyNameInGenitiveFormForMale(familyNameInNominative)
+                : GetFamilyNameInGenitiveFormForFemale(familyNameInNominative);
         }
 
         private string GetFamilyNameInGenitiveFormForFemale(string name)

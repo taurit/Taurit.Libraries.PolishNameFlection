@@ -23,7 +23,8 @@ namespace Taurit.NameHelper.Polish.Tests
         public void NameFormShouldChangeToGenitiveCorrectly_ForMales(string nominative, string genitive, Gender nameGender)
         {
             var nh = new PolishNameFlectionHelper();
-            Assert.Equal(genitive, nh.GetFirstNameInGenitiveForm(nominative));
+            Assert.Equal(genitive, nh.GetFirstName(nominative, Case.Genitive)); // new interface
+            Assert.Equal(genitive, nh.GetFirstNameInGenitiveForm(nominative)); // obsolete interface
         }
 
         /// <summary>
@@ -35,7 +36,9 @@ namespace Taurit.NameHelper.Polish.Tests
         public void NameFormShouldChangeToGenitiveCorrectly_ForFemales(string nominative, string genitive, Gender nameGender)
         {
             var nh = new PolishNameFlectionHelper();
-            Assert.Equal(genitive, nh.GetFirstNameInGenitiveForm(nominative));
+            Assert.Equal(genitive, nh.GetFirstName(nominative, Case.Genitive)); // new interface
+            Assert.Equal(genitive, nh.GetFirstNameInGenitiveForm(nominative)); // obsolete interface
+            
         }
 
         /// <summary>

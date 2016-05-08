@@ -1,5 +1,5 @@
 {
-  "version": "0.0.2-*",
+  "version": "0.0.3-*",
   "iconUrl": "https://raw.githubusercontent.com/taurit/PolishNameFlection/master/Icon.png",
   "description": "Allows to change a form of a Polish first name and family name to a different grammar case. It can be useful in automated generation of messages that use people's names.",
   "summary": "Flection helper for names and surnames in Polish language",
