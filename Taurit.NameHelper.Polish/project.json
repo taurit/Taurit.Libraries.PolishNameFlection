@@ -4,7 +4,7 @@
   "description": "Allows to change a form of a Polish first name and family name to a different grammar case. It can be useful in automated generation of messages that use people's names.",
   "summary": "Flection helper for names and surnames in Polish language",
   "authors": [ "Taurit" ],
-  "tags": [ "polish, name, first, given, surname, forename, flection, nominative, genitive" ],
+  "tags": [ "polish, name, first, given, surname, forename, flection, nominative, genitive, odmiana, imiona, imion, polskie, mianownik, dopelniacz" ],
   "projectUrl": "https://github.com/taurit/PolishNameFlection",
   "licenseUrl": "https://github.com/taurit/PolishNameFlection/blob/master/LICENSE",
   "frameworks": {
