@@ -15,7 +15,9 @@
         "System.Text.RegularExpressions": "4.0.10"
       }
     },
-    "dnx451" : {} 
+    "net35": { },
+    "net40": { },
+    "dnx451": { }
   }
   
 }

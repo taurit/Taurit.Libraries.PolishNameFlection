@@ -1,0 +1,8 @@
+﻿<Application
+    x:Class="Taurit.NameHelper.Polish.Tests.Compatibility.UWP.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Taurit.NameHelper.Polish.Tests.Compatibility.UWP"
+    RequestedTheme="Light">
+
+</Application>
