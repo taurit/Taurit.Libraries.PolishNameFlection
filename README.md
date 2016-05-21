@@ -30,6 +30,6 @@ This project consists of:
 
 ## Target platforms
 
-This project is distributed as a cross-platform class library written in .NET.
+This project is distributed as a cross-platform class library written in .NET. You can find ready-to-use builds in **NuGet** repositories.
 
 It attempts to have as little dependencies as possible and run on platforms compatible with **.NET Standard 1.0** contract set. **.NET Framework 4.0** and **.NET Framework 3.5** are also supported.
