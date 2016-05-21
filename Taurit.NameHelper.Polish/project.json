@@ -1,5 +1,5 @@
 {
-  "version": "0.0.3-*",
+  "version": "0.0.4-*",
   "description": "Allows to change a form of a Polish first name and family name to a different grammar case. It can be useful in automated generation of messages that use people's names.",
   "authors": [ "Taurit" ],
   "packOptions": {

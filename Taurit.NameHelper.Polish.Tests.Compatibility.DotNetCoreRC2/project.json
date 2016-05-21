@@ -9,7 +9,7 @@
       "version": "1.0.0-rc2-3002702",
       "type": "platform"
     },
-    "Taurit.NameHelper.Polish": "0.0.3-*"
+    "Taurit.NameHelper.Polish": "0.0.4-*"
   },
 
   "frameworks": {
