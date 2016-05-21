@@ -44,7 +44,7 @@
 39850;Sikora;Sikora;Sikory;Sikory
 38942;Ostrowski;Ostrowska;Ostrowskiego;Ostrowskiej
 38548;Baran;Baran;Barana;Baran
-38290;Duda;Duda;Dudy;
+38290;Duda;Duda;Dudy;Dudy
 38264;Szewczyk;Szewczyk;Szewczyka;Szewczyk
 38139;Tomaszewski;Tomaszewska;Tomaszewskiego;Tomaszewskiej
 37255;Pietrzak;Pietrzak;Pietrzaka;Pietrzak
@@ -110,7 +110,7 @@
 23266;Kowalewski;Kowalewska;Kowalewskiego;Kowalewskiej
 22536;Urbaniak;Urbaniak;Urbaniaka;Urbaniak
 22462;Kozak;Kozak;Kozaka;Kozak
-22434;Kania;Kania;;
+22434;Kania;Kania;Kani;Kani
 22308;Mikołajczyk;Mikołajczyk;Mikołajczyka;Mikołajczyk
 22131;Czajkowski;Czajkowska;Czajkowskiego;Czajkowskiej
 22105;Mucha;Mucha;Muchy;Muchy
@@ -129,7 +129,7 @@
 20964;Jarosz;Jarosz;Jarosza;Jarosz
 20812;Kołodziejczyk;Kołodziejczyk;Kołodziejczyka;Kołodziejczyk
 20697;Kurek;Kurek;Kurka;Kurek
-20307;Kopeć;Kopeć;;Kopeć
+20307;Kopeć;Kopeć;Kopecia;Kopeć
 20204;Żak;Żak;Żaka;Żak
 20110;Wolski;Wolska;Wolskiego;Wolskiej
 20052;Łuczak;Łuczak;Łuczaka;Łuczak
@@ -137,7 +137,7 @@
 19902;Kot;Kot;Kota;Kot
 19870;Stasiak;Stasiak;Stasiaka;Stasiak
 19826;Stankiewicz;Stankiewicz;Stankiewicza;Stankiewicz
-19796;Piątek;Piątek;;Piątek
+19796;Piątek;Piątek;Piątka;Piątek
 19729;Jóźwiak;Jóźwiak;Jóźwiaka;Jóźwiak
 19396;Urban;Urban;Urbana;Urban
 19382;Dobrowolski;Dobrowolska;Dobrowolskiego;Dobrowolskiej
@@ -205,15 +205,15 @@
 14858;Jędrzejewski;Jędrzejewska;Jędrzejewskiego;Jędrzejewskiej
 14846;Muszyński;Muszyńska;Muszyńskiego;Muszyńskiej
 14799;Świątek;Świątek;Świątka;Świątek
-14683;Kozieł;Kozieł;;Kozieł
+14683;Kozieł;Kozieł;Kozieła;Kozieł
 14657;Osiński;Osińska;Osińskiego;Osińskiej
-14652;Czaja;Czaja;;
+14652;Czaja;Czaja;Czai;Czai
 14641;Lisowski;Lisowska;Lisowskiego;Lisowskiej
 14629;Kuczyński;Kuczyńska;Kuczyńskiego;Kuczyńskiej
 14508;Żukowski;Żukowska;Żukowskiego;Żukowskiej
 14498;Grzybowski;Grzybowska;Grzybowskiego;Grzybowskiej
 14476;Kwiecień;Kwiecień;Kwietnia;Kwiecień
-14449;Pluta;Pluta;;
+14449;Pluta;Pluta;Pluty;Pluty
 14407;Morawski;Morawska;Morawskiego;Morawskiej
 14311;Czyż;Czyż;Czyża;Czyż
 14250;Sobczyk;Sobczyk;Sobczyka;Sobczyk
@@ -223,7 +223,7 @@
 14131;Marzec;Marzec;Marca;Marzec
 14126;Konieczny;Konieczna;Koniecznego;Koniecznej
 14114;Marczak;Marczak;Marczaka;Marczak
-14083;Zych;Zych;;Zych
+14083;Zych;Zych;Zycha;Zych
 14037;Michalik;Michalik;Michalika;Michalik
 14003;Michałowski;Michałowska;Michałowskiego;Michałowskiej
 13994;Kaczor;Kaczor;Kaczora;Kaczor
@@ -242,7 +242,7 @@
 13502;Małek;Małek;Małka;Małek
 13493;Szydłowski;Szydłowska;Szydłowskiego;Szydłowskiej
 13483;Smoliński;Smolińska;Smolińskiego;Smolińskiej
-13456;Kujawa;Kujawa;Kujawy;
+13456;Kujawa;Kujawa;Kujawy;Kujawy
 13441;Lewicki;Lewicka;Lewickiego;Lewickiej
 13382;Przybysz;Przybysz;Przybysza;Przybysz
 13372;Stachowiak;Stachowiak;Stachowiaka;Stachowiak
@@ -283,6 +283,6 @@
 0;Nehri;Nehri;Nehri;Nehri
 0;Dimitrescu;Dimitrescu;Dimitrescu;Dimitrescu
 0;Hugo;Hugo;Hugo;Hugo
-0;Oko;Oko;Oko;
+0;Oko;Oko;Oko;Oko
 0;Korwin-Piotrowski;Korwin-Piotrowska;Korwin-Piotrowskiego;Korwin-Piotrowskiej
 0;Łesiów;Łesiów;Łesiowa;Łesiów

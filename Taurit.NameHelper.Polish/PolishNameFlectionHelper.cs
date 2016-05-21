@@ -139,6 +139,10 @@ namespace Taurit.NameHelper.Polish
             if (name.EndsWithRegex("[szc]ka"))
                 return name.RemoveNthLastCharacter(0).AppendText("iej");
 
+            // Oko -> Oko
+            if (name.EndsWithRegex("(scu|ois|ugo|hr[iu]|[Oo]ko)"))
+                return name;
+
             // Czajka -> Czajki, Kościuszko -> Kościuszki
             if (name.EndsWithRegex("k[ao]"))
                 return name.RemoveNthLastCharacter(0).AppendText("i");
@@ -153,8 +157,16 @@ namespace Taurit.NameHelper.Polish
                 return name.RemoveNthLastCharacter(0).AppendText("i");
 
             // Domagała -> Domagały, Gajda -> Gajdy
-            if (name.EndsWithRegex("[włdpzhrbn]a"))
+            if (name.EndsWithRegex("[włdpzhrbnt]a"))
                 return name.RemoveNthLastCharacter(0).AppendText("y");
+
+            // Czaja -> Czai
+            if (name.EndsWith("ja"))
+                return name.ReplaceEnding("ja", "i");
+
+            // Kania -> Kani
+            if (name.EndsWith("ia"))
+                return name.ReplaceEnding("ia", "i");
 
             // Probably there should be no change in case
             return name;
@@ -207,8 +219,8 @@ namespace Taurit.NameHelper.Polish
             if (name.EndsWith("pień"))
                 return name.ReplaceEnding("pień", "pnia");
 
-            // Domagała -> Domagały
-            if (name.EndsWithRegex("[włdpzhrbn]a"))
+            // Domagała -> Domagały, Pluta -> Pluty
+            if (name.EndsWithRegex("[włdpzhrbnt]a"))
                 return name.RemoveNthLastCharacter(0).AppendText("y");
 
 
@@ -223,6 +235,20 @@ namespace Taurit.NameHelper.Polish
             // Łesiów -> Łesiowa
             if (name.EndsWithRegex("ów"))
                 return name.ReplaceEnding("ów", "owa");
+
+            // Kopeć -> Kopecia, Miś -> Misia
+            if (name.EndsWith("ś"))
+                return name.ReplaceEnding("ś", "sia");
+            if (name.EndsWith("ć"))
+                return name.ReplaceEnding("ć", "cia");
+
+            // Czaja -> Czai
+            if (name.EndsWith("ja"))
+                return name.ReplaceEnding("ja", "i");
+
+            // Kania -> Kani
+            if (name.EndsWith("ia"))
+                return name.ReplaceEnding("ia", "i");
 
 
             return name.AppendText("a");
