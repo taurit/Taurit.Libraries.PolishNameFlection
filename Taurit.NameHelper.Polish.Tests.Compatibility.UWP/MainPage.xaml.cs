@@ -28,7 +28,7 @@ namespace Taurit.NameHelper.Polish.Tests.Compatibility.UWP
 
             var testedName = "Adam";
             IPolishNameFlectionHelper helper = new PolishNameFlectionHelper();
-            string modifiedName = helper.GetFirstNameInGenitiveForm(testedName);
+            string modifiedName = helper.GetFirstName(testedName, Case.Genitive);
 
             TextToDisplay.Text = $"Modified text: {modifiedName}";
         }
