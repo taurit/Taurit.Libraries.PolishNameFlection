@@ -17,6 +17,32 @@ namespace Taurit.NameHelper.Polish.Tests.Compatibility.DotNetCoreRC2
             Debug.Assert(modifiedName == "Adama");
             Console.WriteLine($"Name '{testedName}' was successfuly converted to '{modifiedName}' by the library.");
             Console.ReadKey();
+
+            // Also, test whether code example from documentation compiles and runs correctly:
+            CodeExample();
+
+            Console.ReadKey();
+        }
+
+        /// <summary>
+        /// Example of library usage, for use in Readme file
+        /// </summary>
+        private static void CodeExample()
+        {
+            IPolishNameFlectionHelper helper = new PolishNameFlectionHelper();
+
+            string nameInGenitive1 = helper.GetFirstName("Wiktoria Weronika", Case.Genitive);
+            // -> Wiktorii Weroniki
+
+            string nameInGenitive2 = helper.GetFirstName("Hugo", Case.Genitive);
+            // -> Hugona
+
+            string secondNameInGenitive1 = helper.GetFamilyName("Lewandowska", Gender.Female, Case.Genitive);
+            // -> Lewandowskiej
+
+            string secondNameInGenitive2 = helper.GetFamilyName("Lewandowski", Gender.Male, Case.Genitive);
+            // -> Lewandowskiego
+
         }
     }
 }
