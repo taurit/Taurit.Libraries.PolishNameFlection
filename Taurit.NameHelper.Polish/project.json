@@ -10,7 +10,7 @@
     "tags": [ "polish, name, first, given, surname, forename, flection, nominative, genitive, odmiana, imiona, imion, polskie, mianownik, dopelniacz" ]
   },
   "frameworks": {
-    "netstandard1.5": {
+    "netstandard1.0": {
       "dependencies": {
         "System.Collections": "4.0.11-rc2-24027",
         "System.Runtime": "4.1.0-rc2-24027",
